@@ -110,3 +110,19 @@ for mes in dicc:
         if dicc[mes] not in lista_3:
             lista_3.append([mes,pais,porcentaje[mes][pais]])
 archivo.close()
+valor=-1
+for rows in lista_3:
+    valor+=1
+    if lista_3[valor][2]<20:
+        lista_3.remove(lista_3[valor])
+        valor-=1
+print(lista_3)
+archivo=open("resultados.csv","w+")
+archivo.write("Mes, Pais, % de vuelos")
+archivo.write("\n")
+writer=csv.writer(archivo)
+writer.writerows(lista_3)
+archivo.close()
+#PROFE, JOSE ME ESTUVO AYUDANDO UN POCO CON PEQUEÑAS PARTES DEL CODIGO
+#ME COMENTO QUE USTED LO ASESORO EN EL DESARROLLO DE LA TAREA
+#ME COMPARTIO ALGUNAS FUNCIONES Y METODOS, TALES COMO "SORTED" Y FUNCIONES CON CSV
