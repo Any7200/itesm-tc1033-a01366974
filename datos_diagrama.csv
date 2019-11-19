@@ -1,0 +1,56 @@
+id,Nombre,Biblioteca de figuras,ID de página,Contenido por,Grupo,Origen de línea,Destino de la línea,Flecha de origen,Flecha de destino,Área de texto 1,Área de texto 2,Área de texto 3
+1,Página,,,,,,,,,Página 1 ,,
+2,Clase,UML,1,,,,,,,Flight,"+ id:str
++ tArrival:int
++ tDeparture:int
++ fType:str
++ state:int
++ gArrival:str
++ gDeparture:str
++ trackArrival:int
++ trackDeparture:int
++ pilots:bool
++ assistants:int
++ passengers:int","+ checkPilots()
++ checkAssistants()
++ checkPassengers()"
+3,Clase,UML,1,,,,,,,Airline,+ name:str,
+4,Clase,UML,1,,,,,,,Airplane,"+ id:str
++ manufacturer:str
++ nmodel:str
++ pCapacity:int
++ lCapacity:int
++ maxV:float
++ flights:str
++ nflights:int","+ takeOff()
++ land()
++ checkFlightsnumber()"
+5,Clase,UML,1,,,,,,,Crew,"+ nPassport:int
++ fName:str
++ lName:str
++ dateBirth:int
++ countryBirth:str
++ genre:str
++ cStatus:str",
+6,Clase,UML,1,,,,,,,Passengers,"+ nPassport:int
++ class:str
++ docLuggage:bool
++ onlineRegister:bool
++ checkRegister:bool
++ checkSecurity:bool
++ checkBoarding:bool","+ registerOnline()
++ documentLuggage()"
+7,Clase,UML,1,,,,,,,Report,"+ trackState:str
++ airplanes:int
++ passengers:int
++ pilots:int
++ assistants:int","+ checkTrackstate()
++ countAirplanes()
++ countPassengers()
++ countPilots()
++ countAssistants()"
+8,Línea,,1,,,2,3,None,Composition,0..*,0..*,
+9,Línea,,1,,,2,4,None,Composition,0..*,0..*,
+10,Línea,,1,,,2,5,None,Composition,0..*,0..*,
+11,Línea,,1,,,2,6,None,Aggregation,0..*,0..*,
+12,Línea,,1,,,7,2,None,Composition,0..*,0..*,
