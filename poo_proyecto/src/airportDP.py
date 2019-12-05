@@ -68,11 +68,7 @@ class Airport:
                         number_of_empty_gates, number_of_occupied_gates)
 
         report.write_file()
-
-
-
-
-
+        print("Reporte generado")
 
 
 
@@ -96,7 +92,7 @@ class Flight:
         self.pilot = _pilot
         self.copilot = _copilot
         self.attendants = _attendants
-
+    
 
 class Crew:
     def __init__(self, _passport, _forename, _surname, _date_of_birth,
@@ -108,7 +104,7 @@ class Crew:
         self.country = _country
         self.gender = _gender
         self.marital_status = _marital_status
-
+    
 
 class Attendant(Crew):
     pass
@@ -171,3 +167,38 @@ class AirportAD:
             flights[id+plate] = flight
 
         return flights
+
+    def write_flights(self, _list):
+        #escribir en memoria
+        flights = {}
+        id = _list[0]
+        plate = _list[1]
+        flight = Flight(id, plate, _list[2], _list[3], _list[4], _list[5], _list[6], _list[7],
+                         _list[8], _list[9], _list[10], _list[11], _list[12], _list[13])
+        flights[id+plate] = flight
+        print(flights)
+        return flights
+        #escribir en archivo
+        #FALTA
+    def write_travellers(self, _list):
+        pass
+
+    def write_passengers(self, _list):
+        pass
+
+    def modify_pilots(self):
+        pass
+
+    def modify_crew(self):
+        pass
+
+    def modify_travellers(self):
+        pass
+
+    def modify_passengers(self):
+        pass
+
+    def modify_flights(self):
+        pass
+
+
