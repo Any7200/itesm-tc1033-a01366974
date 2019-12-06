@@ -27,8 +27,8 @@ class AirportUI:
                 else:
                     print("Opción inválida")
             elif opc == 2:
-                print("1.De pilotos \n\r 2.De asistentes de vuelos \n\
-                        \r  \n\r 3.De viajeros \n\r 4.De pasajeros \n\r 5.De vuelos \n\r")
+                print("1.De pilotos \n\r 2.De asistentes de vuelos\
+                        \n\r 3.De viajeros \n\r 4.De pasajeros \n\r 5.De vuelos \n\r")
                 opc2 = input()
                 if opc2 == 1:
                     #revisar
@@ -82,7 +82,7 @@ class CategoriesUI:
     def add_passengers(self):
         #terminar
         print("Ingrese los siguientes datos en una sola línea, separados por comas:\n\r")   
-        print("- vuelo\n\r - pasaporte\n\r - clase\n\r - asiento\n\r - ubicación\n\r)
+        print("- vuelo\n\r - pasaporte\n\r - clase\n\r - asiento\n\r - ubicación\n\r")
         print("EJEMPLO: \n\r\
                 MA159,Me7348,premier,1A,check-in")
         x = (str(input()))
