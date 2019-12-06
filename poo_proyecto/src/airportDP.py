@@ -92,7 +92,14 @@ class Flight:
         self.pilot = _pilot
         self.copilot = _copilot
         self.attendants = _attendants
-    
+
+class Passengers:
+    def __init__(self, _flight, _passport, _classes, _seat, _location):
+        self.flight = _flight
+        self.passport = _passport
+        self.classes = _classes
+        self.seat = _seat
+        self.location = _location
 
 class Crew:
     def __init__(self, _passport, _forename, _surname, _date_of_birth,
@@ -181,10 +188,14 @@ class AirportAD:
         #escribir en archivo
         #FALTA
     def write_travellers(self, _list):
-        pass
-
+        travellers = {}
+        pasaporte = _list[0]
+        traveller = Crew(pasaporte, _list[1], _list[2], _list[3], _list[4], _list[5], _list[6])
+        travellers[pasaporte] = traveller
+        print(travellers)
+        return travellers
     def write_passengers(self, _list):
-        pass
+        #AQUI LO DEJE
 
     def modify_pilots(self):
         pass

@@ -15,9 +15,15 @@ class AirportUI:
                     obj2.write_flights(x)
                 elif opc2 == 2:
                     #EN EL RESTO DE LAS OPCIONES ES PRACTICAMENTE LO MISMO
-                    pass
+                    obj1 = CategoriesUI()
+                    x = obj1.add_travellers()
+                    obj2 = AirportAD()
+                    obj2.write_travellers(x)
                 elif opc2 == 3:
-                    pass
+                    obj1 = CategoriesUI()
+                    x = obj1.add_passengers()
+                    obj2 = AirportAD()
+                    obj2.write_passengers(x)
                 else:
                     print("Opción inválida")
             elif opc == 2:
@@ -63,11 +69,23 @@ class CategoriesUI:
         return lst_vuelos
     def add_travellers(self):
         #terminar
-        return
+        print("Ingrese los siguientes datos en una sola línea, separados por comas:\n\r")   
+        print("- pasaporte\n\r - nombre \n\r - apellido\n\r - fecha de nacimiento\n\r - país\
+                \n\r - género\n\r - estado civil\n\r")
+        print("EJEMPLO: \n\r\
+                ME4467,Elizabeth,Soto,590412,Mexico,NA,Single")
+        x = (str(input()))
+        lst_viajeros = x.split(",")
+        return lst_viajeros
     def add_passengers(self):
         #terminar
-        return
-
+        print("Ingrese los siguientes datos en una sola línea, separados por comas:\n\r")   
+        print("- vuelo\n\r - pasaporte\n\r - clase\n\r - asiento\n\r - ubicación\n\r)
+        print("EJEMPLO: \n\r\
+                MA159,Me7348,premier,1A,check-in")
+        x = (str(input()))
+        lst_pasajeros = x.split(",")
+        return lst_pasajeros
     def get_user_input(self):
         print("Introduce date in format YYMMDD")
         date = input()
