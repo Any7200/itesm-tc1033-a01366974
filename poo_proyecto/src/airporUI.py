@@ -2,7 +2,7 @@ from airportDP import *
 class AirportUI:
     def user_decision_menu(self):
         while True:
-            print("Bienvenido, ¿Qué desea hacer? \n\r 1.Agregar datos \n\r 2.Modificar datos \n\r 3.Reporte \n\r")
+            print("Bienvenido, ¿Qué desea hacer? \n\r 1.Agregar datos \n\r 2.Modificar datos \n\r 3.Reporte \n\r 4.-Salir")
             opc = int(input())
             if opc == 1:
                 print("1.De vuelos \n\r 2.De viajeros \n\r 3.De pasajeros \n\r")
@@ -44,6 +44,8 @@ class AirportUI:
                 my_airport = Airport()
                 my_airport.populate_airport()
                 my_airport.generate_statistics(date, time)
+            elif opc == 4:
+                break
             else:
                 print("Opción inválida")
 

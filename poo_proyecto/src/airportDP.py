@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 class Report:
     def __init__(self, _date, _time, _no_empty_tracks, _no_occupied_tracks, _no_empty_gates, _no_occupied_gates):
         self.date = _date
