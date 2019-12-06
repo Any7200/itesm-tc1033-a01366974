@@ -175,6 +175,48 @@ class AirportAD:
             flights[id+plate] = flight
 
         return flights
+    
+    def read_passengers(self):
+        passengers_file = open("data/passengers.csv", "r", encoding="utf-8")
+        lines = passengers_file.readlines()
+        passengers_file.close()
+        lines.pop(0)
+        passengers = {}
+        
+        for l in lines:
+            fields = l.split(",")
+            passport = fields[0]
+            passenger = Passenger(passport, fields[1], fields[2], fields[3], fields[4])
+            passengers[passport] = passenger
+            return passengers
+
+    def read_planes(self):
+        planes_file = open("data/planes.csv", "r", encoding="utf-8")
+        lines = planes_file.readlines()
+        planes_file.close()
+        lines.pop(0)
+        planes = {}  
+
+        for l in lines:
+            fields = l.split(",")
+            plate = fields [0]
+            plane = Plane(plate, fields[1], fields[2],fields[3],fields[4],fields[5])
+            planes[plate] = plane
+            return planes
+
+    def read_travellers(self):
+        travellers_file = open("data/travellers.csv", "r", encoding="utf-8")
+        lines = travellers_file.readlines()
+        travellers_file.close()
+        lines.pop(0)
+        travellers = {} 
+
+        for l in lines:
+            fields = l.split(",")
+            passport = fields [0]
+            traveller = Traveller(passport,fields[1], fields[2], fields[3], fields[4], fields[5], fields[6])
+            travellers[passport] = traveller
+            return travellers
 
     def write_flights(self, _list):
         #escribir en memoria
