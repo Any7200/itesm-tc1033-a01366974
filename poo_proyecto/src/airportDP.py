@@ -1,20 +1,28 @@
 # -*- coding: utf-8 -*-
 class Report:
-    def __init__(self, _date, _time, _no_empty_tracks, _no_occupied_tracks, _no_empty_gates, _no_occupied_gates):
+    def __init__(self, _date, _time, _no_empty_tracks, _no_occupied_tracks,
+                 _no_passengers_check_in, _no_passengers_security, _no_passengers_boarded,
+                  _no_empty_gates, _no_occupied_gates):
         self.date = _date
         self.time = _time
         self.no_empty_tracks = _no_empty_tracks
         self.no_occupied_tracks = _no_occupied_tracks
+        self.no_passengers_check_in = _no_passengers_check_in
+        self.no_passengers_security = _no_passengers_security
+        self.no_passengers_boarded = _no_passengers_boarded
         self.no_empty_gates = _no_empty_gates
         self.no_occupied_gates = _no_occupied_gates
 
     def write_file(self):
         statistics_file = open("data/statistics.csv", "w+")
-        statistics_file.write("date,time,# of empty tracks,# of occupied tracks, # of empty gates,# of occupied gates\n")
+        statistics_file.write("date,time,# of empty tracks,# of occupied tracks, #of passengers in check-in, # of passenger in security, # of passengers boarded , # of empty gates,# of occupied gates\n")
         statistics_file.write(self.date+",")
         statistics_file.write(self.time+",")
         statistics_file.write(str(self.no_empty_tracks)+",")
         statistics_file.write(str(self.no_occupied_tracks)+",")
+        statistics_file.weite(str(self.no_passengers_check_in)+",")
+        statistics_file.write(str(self.no_passengers_security)+",")
+        statistics_file.write(str(self.no_passengers_boarded)+",")
         statistics_file.write(str(self.no_empty_gates)+",")
         statistics_file.write(str(self.no_occupied_gates)+",")
 
@@ -34,13 +42,17 @@ class Airport:
         self.pilots = data_loader.read_pilots()
         self.flights = data_loader.read_flights()
         self.attendants = data_loader.read_attendants()
+        self.passengers = data_loader.read_passengers()
 
     def generate_statistics(self, _date, _time):
-
+        
         number_empty_tracks = 0
         number_of_occupied_tracks = 0
         number_of_empty_gates = 0
         number_of_occupied_gates = 0
+        number_of_passengers_check_in = 0
+        number_of_passengers_security = 0
+        number_of_passengers_boarded = 0
 
         for flight in self.flights.values():
             # origin
@@ -63,7 +75,24 @@ class Airport:
                     number_of_empty_gates += 1
                 else:
                     number_of_occupied_gates += 1
+         
+            #aqui va el for para passengers
+        for passenger in self.passengers.values():
+            #location
+            if passenger.location == "check in":
+                    number_of_passengers_check_in += 1
 
+            elif passenger.location == "security":
+                    number_of_passengers_security += 1
+            
+            elif passenger.location == "boarded":
+                    number_of_passengers_boarded +=  1
+            else:
+                print("INVALID")
+
+
+
+                
         report = Report(_date, _time, number_empty_tracks,
                         number_of_occupied_tracks,
                         number_of_empty_gates, number_of_occupied_gates)
