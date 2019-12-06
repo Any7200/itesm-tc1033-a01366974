@@ -268,7 +268,13 @@ class AirportAD:
         return travellers
     def write_passengers(self, _list):
         #AQUI LO DEJE
-
+        passengers = {}
+        pasaporte = _list[1]
+        passenger = Passengers(_list[0], pasaporte, _list[2], _list[3], _list[4])
+        passengers[pasaporte] = passenger
+        print(passengers)
+        print(passengers["Me7348"])
+        return passengers
     def modify_pilots(self):
         pass
 
