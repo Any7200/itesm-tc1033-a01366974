@@ -107,13 +107,10 @@ class Airport:
             else:
                 print("INVALID")
 
-
-
-
-
                 
         report = Report(_date, _time, number_empty_tracks,
-                        number_of_occupied_tracks,
+                        number_of_occupied_tracks, number_of_passengers_check_in, number_of_passengers_security, 
+                        number_of_passengers_boarded, number_of_flights_landed, number_of_flights_in_transit, 
                         number_of_empty_gates, number_of_occupied_gates)
 
         report.write_file()
