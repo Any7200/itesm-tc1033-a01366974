@@ -84,7 +84,6 @@ class Airport:
                 else:
                     number_of_occupied_gates += 1
          
-            #aqui va el for para passengers
         for passenger in self.passengers.values():
             #location
             if passenger.location == "check in":
