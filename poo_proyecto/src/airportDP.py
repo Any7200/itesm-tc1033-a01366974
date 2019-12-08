@@ -35,11 +35,12 @@ class Report:
 class Airport:
     def __init__(self):
         self.tracks = None
-        self.airplanes = None
         self.passengers = None
         self.pilots = None
-        self.attendants = "vacío"
+        self.attendants = None
         self.travellers = None
+        self.flights = None
+        self.planes = None
 
     def populate_airport(self):
         data_loader = AirportAD()
@@ -47,7 +48,8 @@ class Airport:
         self.flights = data_loader.read_flights()
         self.attendants = data_loader.read_attendants()
         self.passengers = data_loader.read_passengers()
-        
+        self.travellers = data_loader.read_travellers()
+        self.planes
 
     def generate_statistics(self, _date, _time):
         
@@ -116,7 +118,14 @@ class Airport:
         report.write_file()
         print("Reporte generado")
 
-
+class Planes:
+    def __init__(self, _plate, _manufacturer, _model, _pcapacity, _lcapacity, _maxspeed):
+        self.plate = _plate
+        self.manufacturer = _manufacturer
+        self.model = _model
+        self.pcapacity = _pcapacity
+        self.lcapacity = _lcapacity
+        self.maxspeed = _maxspeed
 
 class Flight:
     def __init__(self, _id, _plate, _origin, _destiny,
@@ -157,7 +166,8 @@ class Crew:
         self.country = _country
         self.gender = _gender
         self.marital_status = _marital_status
-    
+class Traveller(Crew):
+    pass
 
 class Attendant(Crew):
     pass
@@ -183,6 +193,8 @@ class AirportAD:
             attendant = Attendant(passport, fields[1], fields[2],
                                   fields[3], fields[4], fields[5], fields[6])
             attendants[passport] = attendant
+        obj1 = Airport()
+        obj1.attendants = attendants
         return attendants
 
     def read_pilots(self):
@@ -199,6 +211,8 @@ class AirportAD:
             pilot = Pilot(passport, fields[1], fields[2],
                            fields[3], fields[4], fields[5], fields[6])
             pilots[passport] = pilot
+        obj1 = Airport()
+        obj1.pilots = pilots
         return pilots
 
     def read_flights(self):
@@ -217,9 +231,27 @@ class AirportAD:
                             fields[3], fields[4], fields[5], fields[6],
                             fields[7], fields[8], fields[9], fields[10],
                             fields[11], fields[12], fields[13])
-            flights[id+plate] = flight
-
+            code = id+plate
+            flights[code] = flight
+        obj1 = Airport()
+        obj1.flights = flights
         return flights
+
+    def read_planes(self):
+        planes_file = open("data/planes.csv", "r", encoding="utf-8")
+        lines = planes_file.readlines()
+        planes_file.close()
+        lines.pop(0)
+        planes = {}
+        
+        for l in lines:
+            fields = l.split(",")
+            plate = fields[0]
+            plane = Planes(plate, fields[1], fields[2], fields[3], fields[4], fields[5])
+            planes[plate] = plane
+        obj1 = Airport()
+        obj1.planes = planes
+        return planes 
     
     def read_passengers(self):
         passengers_file = open("data/passengers.csv", "r", encoding="utf-8")
@@ -231,9 +263,11 @@ class AirportAD:
         for l in lines:
             fields = l.split(",")
             passport = fields[0]
-            passenger = Passenger(passport, fields[1], fields[2], fields[3], fields[4])
+            passenger = Passengers(passport, fields[1], fields[2], fields[3], fields[4])
             passengers[passport] = passenger
-            return passengers 
+        obj1 = Airport()
+        obj1.passengers = passengers
+        return passengers 
 
     def read_planes(self):
         planes_file = open("data/planes.csv", "r", encoding="utf-8")
@@ -247,7 +281,9 @@ class AirportAD:
             plate = fields [0]
             plane = Plane(plate, fields[1], fields[2],fields[3],fields[4],fields[5])
             planes[plate] = plane
-            return planes
+        obj1 = Airport()
+        obj1.planes = planes
+        return planes
 
     def read_travellers(self):
         travellers_file = open("data/travellers.csv", "r", encoding="utf-8")
@@ -261,40 +297,63 @@ class AirportAD:
             passport = fields [0]
             traveller = Traveller(passport,fields[1], fields[2], fields[3], fields[4], fields[5], fields[6])
             travellers[passport] = traveller
-            return travellers
+        obj1 = Airport()
+        obj1.travellers = travellers
+        return travellers
 
-    def write_flights(self, _list):
+    def write_flights(self, _list, _prev_list):
         #escribir en memoria
         flights = {}
         id = _list[0]
         plate = _list[1]
         flight = Flight(id, plate, _list[2], _list[3], _list[4], _list[5], _list[6], _list[7],
                          _list[8], _list[9], _list[10], _list[11], _list[12], _list[13])
-        flights[id+plate] = flight
+        code = id+plate
         print(flights)
-        return flights
+        _prev_list[code] = flight
+        print(_prev_list)
+        obj1 = Airport()
+        obj1.flights = _prev_list
+        return _prev_list
         #escribir en archivo
         #FALTA
-    def write_travellers(self, _list):
+    def write_travellers(self, _list, _prev_list):
         travellers = {}
         pasaporte = _list[0]
         traveller = Crew(pasaporte, _list[1], _list[2], _list[3], _list[4], _list[5], _list[6])
-        travellers[pasaporte] = traveller
         print(travellers)
-        return travellers
-    def write_passengers(self, _list):
+        _prev_list[pasaporte] = traveller
+        print(_prev_list)
+        obj1 = Airport()
+        obj1.travellers = _prev_list
+        return _prev_list
+    def write_passengers(self, _list, _prev_list):
         #AQUI LO DEJE
         passengers = {}
         pasaporte = _list[1]
         passenger = Passengers(_list[0], pasaporte, _list[2], _list[3], _list[4])
-        passengers[pasaporte] = passenger
         print(passengers)
-        print(passengers["Me7348"])
-        return passengers
-    def modify_pilots(self):
-        pass
-
-    def modify_crew(self):
+        _prev_list[pasaporte] = passenger
+        print(_prev_list)
+        obj1 = Airport()
+        obj1.passengers = _prev_list
+        return _prev_list
+    def modify_pilots(self, _passport, _x, _dict):
+        if _x == 1:
+            _dict[_passport].marital_status == "Single"
+        elif _x == 2:
+            _dict[_passport].marital_status == "Married"
+        elif _x == 3:
+            _dict[_passport].marital_status == "Divorced"
+        elif _x == 4:
+            _dict[_passport].marital_status == "Widowed"
+        else:
+            print("Opción inválida")
+        print(_dict[_passport].marital_status)
+        obj1 = Airport()
+        obj1.pilots = _dict
+        return _dict
+    def modify_attendants(self):
         pass
 
     def modify_travellers(self):

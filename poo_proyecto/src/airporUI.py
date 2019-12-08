@@ -2,7 +2,7 @@ from airportDP import *
 class AirportUI:
     def user_decision_menu(self):
         while True:
-            print("Bienvenido, ¿Qué desea hacer? \n\r 1.Agregar datos \n\r 2.Modificar datos \n\r 3.Consultar Reporte \n\r 4.-Salir")
+            print("Bienvenido, ¿Qué desea hacer? \n\r 1.Agregar datos \n\r 2.Modificar datos \n\r 3.Reporte \n\r 4.-Salir")
             opc = int(input())
             if opc == 1:
                 print("1.De vuelos \n\r 2.De viajeros \n\r 3.De pasajeros \n\r")
@@ -12,27 +12,33 @@ class AirportUI:
                     obj1 = CategoriesUI()
                     x = obj1.add_data_flight()
                     obj2 = AirportAD()
-                    obj2.write_flights(x)
+                    y = obj2.read_flights()
+                    obj2.write_flights(x, y)
                 elif opc2 == 2:
                     #EN EL RESTO DE LAS OPCIONES ES PRACTICAMENTE LO MISMO
                     obj1 = CategoriesUI()
                     x = obj1.add_travellers()
                     obj2 = AirportAD()
-                    obj2.write_travellers(x)
+                    y = obj2.read_travellers()
+                    obj2.write_travellers(x, y)
                 elif opc2 == 3:
                     obj1 = CategoriesUI()
                     x = obj1.add_passengers()
                     obj2 = AirportAD()
-                    obj2.write_passengers(x)
+                    y = obj2.read_passengers()
+                    obj2.write_passengers(x, y)
                 else:
                     print("Opción inválida")
             elif opc == 2:
                 print("1.De pilotos \n\r 2.De asistentes de vuelos\
                         \n\r 3.De viajeros \n\r 4.De pasajeros \n\r 5.De vuelos \n\r")
-                opc2 = input()
+                opc2 = int(input())
                 if opc2 == 1:
-                    #revisar
-                    pass
+                    obj1 = CategoriesUI()
+                    obj2 = Airport()
+                    obj3 = AirportAD()
+                    passport, x = obj1.change_pilots()
+                    obj3.modify_pilots(passport, x, obj2.pilots)
                 elif opc2 == 2:
                     pass
                 elif opc2 == 3:
@@ -51,7 +57,8 @@ class AirportUI:
                 my_airport.populate_airport()
                 my_airport.generate_statistics(date, time)
             elif opc == 4:
-                break
+                pass
+                #Falta
             else:
                 print("Opción inválida")
 
@@ -88,6 +95,49 @@ class CategoriesUI:
         x = (str(input()))
         lst_pasajeros = x.split(",")
         return lst_pasajeros
+    def change_pilots(self):
+        print("Ingrese el pasaporte del piloto")
+        passport_pilot = str(input())
+        print("Elija el estado civil al que desee cambiarlo:\n\r 1.Single (soltero)\
+                \n\r 2.Married (casado)\n\r 3.Divorced (divorciado)\
+                \n\r 4.Widowed (viudo)")
+        new_marital_status = int(input())
+        return passport_pilot, new_marital_status
+    def change_attendants(self):
+        print("Ingrese el pasaporte del asistente de vuelo")
+        passport_attendant = str(input())
+        print("Elija el estado civil al que desee cambiarlo:\n\r 1.Single (soltero)\
+                \n\r 2.Married (casado)\n\r 3.Divorced (divorciado)\
+                \n\r 4.Widowed (viudo)")
+        new_marital_status = int(input())
+        return passport_attendant, new_marital_status
+    def change_travellers(self):
+        print("Ingrese el pasaporte del viajero")
+        passport_travellers = str(input())
+        print("¿Qué desea modificar?\n\r 1.Estado Civil\n\r 2.Género\
+                \n\r 3.Fecha de Nacimiento\n\r 4.Nombre y Apellido")
+        decision = int(input())
+        if decision == 1:
+            print("Elija el estado civil al que desee cambiarlo:\n\r 1.Single (soltero)\
+                \n\r 2.Married (casado)\n\r 3.Divorced (divorciado)\
+                \n\r 4.Widowed (viudo)")
+            x = int(input())
+        elif decision == 2:
+            print("Elija el género al que desee cambiarlo:\
+                    \n\r 1.Masculino\n\r 2.Femenino")
+            x = int(input())
+        elif decision == 3:
+            print("Escriba la nueva fecha de nacimiento en el formato YYMMDD")
+            x = input()
+        elif decision == 4:
+            print("Escriba el nombre del viajero al que desee cambiarlo")
+            y1 = str(input())
+            print("Escriba el apellido del viajero al que desee cambiarlo")
+            y2 = str(input())
+            x = [y1,y2]
+        else:
+            print("Opción inválida")  
+        return passport_travellers, x  
     def get_user_input(self):
         print("Introduce date in format YYMMDD")
         date = input()
