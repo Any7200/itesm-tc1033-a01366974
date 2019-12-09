@@ -1,6 +1,8 @@
 from airportDP import *
 class AirportUI:
     def user_decision_menu(self):
+        my_airport = Airport()
+        my_airport.populate_airport()
         while True:
             print("Bienvenido, ¿Qué desea hacer? \n\r 1.Agregar datos \n\r 2.Modificar datos \n\r 3.Reporte \n\r 4.-Salir")
             opc = int(input())
@@ -37,44 +39,46 @@ class AirportUI:
                     obj1 = CategoriesUI()
                     obj3 = AirportAD()
                     passport, x = obj1.change_pilots()
-                    y = obj3.read_pilots() 
+                    y = my_airport.pilots
                     obj3.modify_pilots(passport, x, y)
                 elif opc2 == 2:
                     obj1 = CategoriesUI()
                     obj3 = AirportAD()
                     passport, x = obj1.change_attendants()
-                    y = obj3.read_attendants() 
+                    y = my_airport.attendants 
                     obj3.modify_attendants(passport, x, y)
                 elif opc2 == 3:
                     obj1 = CategoriesUI()
                     obj3 = AirportAD()
                     passport, y, x = obj1.change_travellers()
-                    dic = obj3.read_travellers() 
+                    dic = my_airport.travellers
                     obj3.modify_travellers(passport, y, x, dic)
                 elif opc2 == 4:
                     obj1 = CategoriesUI()
                     obj3 = AirportAD()
                     passport, y, x = obj1.change_passengers()
-                    dic = obj3.read_passengers() 
+                    dic = my_airport.passengers
                     obj3.modify_passengers(passport, y, x, dic)
                 elif opc2 == 5:
                     obj1 = CategoriesUI()
                     obj3 = AirportAD()
                     passport, y, x = obj1.change_flights()
-                    dic = obj3.read_flights() 
+                    dic = my_airport.flights 
                     obj3.modify_flights(passport, y, x, dic)
                 else:
                     print("Opción inválida")
             elif opc == 3:
-                interaction = AirportUI()
+                interaction = CategoriesUI()
                 date, time = interaction.get_user_input()
-
-                my_airport = Airport()
-                my_airport.populate_airport()
                 my_airport.generate_statistics(date, time)
             elif opc == 4:
-                pass
-                #Falta
+                print("Hasta luego.")
+                my_airport.update_file_attendants()
+                my_airport.update_file_flights()
+                my_airport.update_file_passengers()
+                my_airport.update_file_pilots()
+                my_airport.update_file_travellers()
+                break
             else:
                 print("Opción inválida")
 

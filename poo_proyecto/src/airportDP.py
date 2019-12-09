@@ -31,7 +31,6 @@ class Report:
         statistics_file.write(str(self.no_occupied_gates)+",")
 
 
-
 class Airport:
     def __init__(self):
         self.tracks = None
@@ -50,7 +49,56 @@ class Airport:
         self.passengers = data_loader.read_passengers()
         self.travellers = data_loader.read_travellers()
         self.planes = data_loader.read_planes()
-        return self.pilots, self.flights, self.attendants, self.passengers, self.travellers, self.planes
+
+    def update_file_attendants(self):
+        archivo = open("data/attendants.csv","w+")
+        archivo.write("passport,forename,surname,date of birth,country,gender,marital status")
+        for i in self.attendants.values():
+            archivo.write()
+            archivo.write(",")
+            if i.marital_status == True:
+                archivo.write("\n")
+        archivo.close()
+    
+    def update_file_flights(self):
+        archivo = open("data/flights.csv","w+")
+        archivo.write("id,plate,origin,destiny,departure,arriving,status,departure gate,take off track,arriving gate,landing track,pilot,copilot, attendants")
+        for i in self.flights.values():
+            archivo.write(i)
+            archivo.write(",")
+            if i.attendants == True:
+                archivo.write("\n")
+        archivo.close()
+    
+    def update_file_passengers(self):
+        archivo = open("data/passengers.csv","w+")
+        archivo.write("id,plate,origin,destiny,departure,arriving,status,departure gate,take off track,arriving gate,landing track,pilot,copilot, attendants")
+        for i in self.passengers.values():
+            archivo.write(i)
+            archivo.write(",")
+            if i.location == True:
+                archivo.write("\n")
+        archivo.close()
+    
+    def update_file_pilots(self):
+        archivo = open("data/pilots.csv","w+")
+        archivo.write("passport,forename,surname,date of birth, country, gender, marital status")
+        for i in self.pilots.values():
+            archivo.write(i)
+            archivo.write(",")
+            if i.marital_status == True:
+                archivo.write("\n")
+        archivo.close()
+    
+    def update_file_travellers(self):
+        archivo = open("data/travellers.csv","w+")
+        archivo.write("passport,forename,surname,date of birth, country, gender, marital status")
+        for i in self.travellers.values():
+            archivo.write(i)
+            archivo.write(",")
+            if i.marital_status == True:
+                archivo.write("\n")
+        archivo.close()
 
     def generate_statistics(self, _date, _time):
         
@@ -195,6 +243,7 @@ class AirportAD:
                                   fields[3], fields[4], fields[5], fields[6])
             attendants[passport] = attendant
         obj1 = Airport()
+        
         obj1.attendants = attendants
         return attendants
 
@@ -213,6 +262,7 @@ class AirportAD:
                            fields[3], fields[4], fields[5], fields[6])
             pilots[passport] = pilot
         obj1 = Airport()
+        
         obj1.pilots = pilots
         return pilots
 
@@ -235,6 +285,7 @@ class AirportAD:
             code = id+plate
             flights[code] = flight
         obj1 = Airport()
+        
         obj1.flights = flights
         return flights
 
@@ -251,6 +302,7 @@ class AirportAD:
             plane = Planes(plate, fields[1], fields[2], fields[3], fields[4], fields[5])
             planes[plate] = plane
         obj1 = Airport()
+        
         obj1.planes = planes
         return planes 
     
@@ -267,6 +319,7 @@ class AirportAD:
             passenger = Passengers(fields[0], passport, fields[2], fields[3], fields[4])
             passengers[passport] = passenger
         obj1 = Airport()
+        
         obj1.passengers = passengers
         return passengers 
 
@@ -283,6 +336,7 @@ class AirportAD:
             traveller = Traveller(passport,fields[1], fields[2], fields[3], fields[4], fields[5], fields[6])
             travellers[passport] = traveller
         obj1 = Airport()
+        
         obj1.travellers = travellers
         return travellers
 
@@ -298,6 +352,7 @@ class AirportAD:
         _prev_list[code] = flight
         print(_prev_list)
         obj1 = Airport()
+        
         obj1.flights = _prev_list
         return _prev_list
         #escribir en archivo
@@ -310,6 +365,7 @@ class AirportAD:
         _prev_list[pasaporte] = traveller
         print(_prev_list)
         obj1 = Airport()
+        
         obj1.travellers = _prev_list
         return _prev_list
     def write_passengers(self, _list, _prev_list):
@@ -321,6 +377,7 @@ class AirportAD:
         _prev_list[pasaporte] = passenger
         print(_prev_list)
         obj1 = Airport()
+        
         obj1.passengers = _prev_list
         return _prev_list
     def modify_pilots(self, _passport, _x, _dict):
@@ -336,6 +393,7 @@ class AirportAD:
             print("Opción inválida")
         print(_dict[_passport].marital_status)
         obj1 = Airport()
+        
         obj1.pilots = _dict
         return _dict
     def modify_attendants(self, _passport, _x, _dict):
@@ -351,6 +409,7 @@ class AirportAD:
             print("Opción inválida")
         print(_dict[_passport].marital_status)
         obj1 = Airport()
+        
         obj1.attendants = _dict
         return _dict
     def modify_travellers(self, _passport, _x, x, _dict):
@@ -367,6 +426,7 @@ class AirportAD:
                 print("Opción inválida")
             print(_dict[_passport].marital_status)
             obj1 = Airport()
+            
             obj1.travellers = _dict
         elif _x == 2:
             if x == 1:
@@ -377,11 +437,13 @@ class AirportAD:
                 print("Opción inválida")
             print(_dict[_passport].gender)
             obj1 = Airport()
+            
             obj1.travellers = _dict
         elif _x == 3:
             _dict[_passport].date_of_birth = x
             print(_dict[_passport].date_of_birth)
             obj1 = Airport()
+            
             obj1.travellers = _dict
         elif _x == 4:
             flname = x.split(",")
@@ -389,6 +451,7 @@ class AirportAD:
             _dict[_passport].surname = flname[1]
             print(_dict[_passport].forename, _dict[_passport].surname)
             obj1 = Airport()
+            
             obj1.travellers = _dict
         else:
             print("Opción inválida")
@@ -397,6 +460,7 @@ class AirportAD:
             _dict[_passport].seat = x
             print(_dict[_passport].seat)
             obj1 = Airport()
+            
             obj1.passengers = _dict
         elif _x == 2:
             if x == 1:
@@ -409,6 +473,7 @@ class AirportAD:
                 print("Opción inválida")
             print(_dict[_passport].classes)
             obj1 = Airport()
+            
             obj1.passengers = _dict
         elif _x == 3:
             if x == 1:
@@ -421,6 +486,7 @@ class AirportAD:
                 print("Opción inválida")
             print(_dict[_passport].location)
             obj1 = Airport()
+            
             obj1.passengers = _dict
         else:
             print("Opción inválida")
@@ -444,6 +510,7 @@ class AirportAD:
         else:
             print("Opción inválida")
         obj1 = Airport()
+        
         obj1.flights = _dict
 
 

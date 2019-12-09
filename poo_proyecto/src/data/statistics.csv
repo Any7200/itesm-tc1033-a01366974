@@ -1,2 +1,2 @@
-date,time,# of empty tracks,# of occupied tracks, # of empty gates,# of occupied gates
-181112,0123,0,1,1,0,
+date,time,# of empty tracks,# of occupied tracks, # of passengers in check-in, # of passenger in security, # of passengers boarded , # of flights landed, # of flights departured, # of empty gates,# of occupied gates
+181211,0807,0,0,0,0,0,267,255,0,0,
