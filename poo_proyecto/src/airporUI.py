@@ -35,18 +35,34 @@ class AirportUI:
                 opc2 = int(input())
                 if opc2 == 1:
                     obj1 = CategoriesUI()
-                    obj2 = Airport()
                     obj3 = AirportAD()
                     passport, x = obj1.change_pilots()
-                    obj3.modify_pilots(passport, x, obj2.pilots)
+                    y = obj3.read_pilots() 
+                    obj3.modify_pilots(passport, x, y)
                 elif opc2 == 2:
-                    pass
+                    obj1 = CategoriesUI()
+                    obj3 = AirportAD()
+                    passport, x = obj1.change_attendants()
+                    y = obj3.read_attendants() 
+                    obj3.modify_attendants(passport, x, y)
                 elif opc2 == 3:
-                    pass
+                    obj1 = CategoriesUI()
+                    obj3 = AirportAD()
+                    passport, y, x = obj1.change_travellers()
+                    dic = obj3.read_travellers() 
+                    obj3.modify_travellers(passport, y, x, dic)
                 elif opc2 == 4:
-                    pass
+                    obj1 = CategoriesUI()
+                    obj3 = AirportAD()
+                    passport, y, x = obj1.change_passengers()
+                    dic = obj3.read_passengers() 
+                    obj3.modify_passengers(passport, y, x, dic)
                 elif opc2 == 5:
-                    pass
+                    obj1 = CategoriesUI()
+                    obj3 = AirportAD()
+                    passport, y, x = obj1.change_flights()
+                    dic = obj3.read_flights() 
+                    obj3.modify_flights(passport, y, x, dic)
                 else:
                     print("Opción inválida")
             elif opc == 3:
@@ -137,7 +153,52 @@ class CategoriesUI:
             x = [y1,y2]
         else:
             print("Opción inválida")  
-        return passport_travellers, x  
+        return passport_travellers, decision, x
+    def change_passengers(self):
+        print("Ingrese el pasaporte del pasajero")
+        passport_passenger = str(input())
+        print("¿Qué desea modificar?\n\r 1.Asiento\n\r 2.Clase\
+                \n\r 3.Ubicación")
+        decision = int(input())
+        if decision == 1:
+            print("Escriba el nuevo asiento")
+            x = str(input())
+        elif decision == 2:
+            print("¿Cuál es la nueva clase del pasajero?\n\r1.Premier\n\r2.Business\n\r3.Economic")
+            x = int(input())
+        elif decision == 3:
+            print("¿Cuál es la nueva ubicación del pasajero?\n\r1.Check-in\n\r2.Security\n\r3.Boarded")
+            x = int(input())
+        else:
+            print("Opción inválida")
+        return passport_passenger, decision, x
+    def change_flights(self):
+        print("Ingrese la identificación más la matrícula del vuelo")
+        code = str(input())
+        print("¿Qué desea modificar?\n\r 1.Estatus\n\r 2.Puertas\
+                \n\r 3.Pistas\n\r4.Tripulación")
+        decision = int(input())
+        if decision == 1:
+            print("Escriba el nuevo estatus del vuelo")
+            x = str(input())
+        elif decision == 2:
+            print("Escriba la puerta de salida")
+            y1 = str(input())
+            print("Escriba la puerta de llegada")
+            y2 = str(input())
+            x = [y1,y2]
+        elif decision == 3:
+            print("Escriba la pista de despegue")
+            y1 = int(input())
+            print("Escriba la pista de aterrizaje")
+            y2 = int(input())
+            x = [y1,y2]
+        elif decision == 4:
+            print("Escriba los pasaportes de cada tripulante, separados por punto y coma")
+            x = str(input())
+        else:
+            print("Opción inválida")
+        return code, decision, x
     def get_user_input(self):
         print("Introduce date in format YYMMDD")
         date = input()

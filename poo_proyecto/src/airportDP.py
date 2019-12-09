@@ -22,7 +22,7 @@ class Report:
         statistics_file.write(self.time+",")
         statistics_file.write(str(self.no_empty_tracks)+",")
         statistics_file.write(str(self.no_occupied_tracks)+",")
-        statistics_file.weite(str(self.no_passengers_check_in)+",")
+        statistics_file.write(str(self.no_passengers_check_in)+",")
         statistics_file.write(str(self.no_passengers_security)+",")
         statistics_file.write(str(self.no_passengers_boarded)+",")
         statistics_file.write(str(self.no_flights_landed)+",")
@@ -49,7 +49,8 @@ class Airport:
         self.attendants = data_loader.read_attendants()
         self.passengers = data_loader.read_passengers()
         self.travellers = data_loader.read_travellers()
-        self.planes
+        self.planes = data_loader.read_planes()
+        return self.pilots, self.flights, self.attendants, self.passengers, self.travellers, self.planes
 
     def generate_statistics(self, _date, _time):
         
@@ -88,7 +89,7 @@ class Airport:
          
         for passenger in self.passengers.values():
             #location
-            if passenger.location == "check in":
+            if passenger.location == "check-in":
                     number_of_passengers_check_in += 1
 
             elif passenger.location == "security":
@@ -262,28 +263,12 @@ class AirportAD:
         
         for l in lines:
             fields = l.split(",")
-            passport = fields[0]
-            passenger = Passengers(passport, fields[1], fields[2], fields[3], fields[4])
+            passport = fields[1]
+            passenger = Passengers(fields[0], passport, fields[2], fields[3], fields[4])
             passengers[passport] = passenger
         obj1 = Airport()
         obj1.passengers = passengers
         return passengers 
-
-    def read_planes(self):
-        planes_file = open("data/planes.csv", "r", encoding="utf-8")
-        lines = planes_file.readlines()
-        planes_file.close()
-        lines.pop(0)
-        planes = {}  
-
-        for l in lines:
-            fields = l.split(",")
-            plate = fields [0]
-            plane = Plane(plate, fields[1], fields[2],fields[3],fields[4],fields[5])
-            planes[plate] = plane
-        obj1 = Airport()
-        obj1.planes = planes
-        return planes
 
     def read_travellers(self):
         travellers_file = open("data/travellers.csv", "r", encoding="utf-8")
@@ -340,29 +325,125 @@ class AirportAD:
         return _prev_list
     def modify_pilots(self, _passport, _x, _dict):
         if _x == 1:
-            _dict[_passport].marital_status == "Single"
+            _dict[_passport].marital_status = "Single"
         elif _x == 2:
-            _dict[_passport].marital_status == "Married"
+            _dict[_passport].marital_status = "Married"
         elif _x == 3:
-            _dict[_passport].marital_status == "Divorced"
+            _dict[_passport].marital_status = "Divorced"
         elif _x == 4:
-            _dict[_passport].marital_status == "Widowed"
+            _dict[_passport].marital_status = "Widowed"
         else:
             print("Opción inválida")
         print(_dict[_passport].marital_status)
         obj1 = Airport()
         obj1.pilots = _dict
         return _dict
-    def modify_attendants(self):
-        pass
-
-    def modify_travellers(self):
-        pass
-
-    def modify_passengers(self):
-        pass
-
-    def modify_flights(self):
-        pass
+    def modify_attendants(self, _passport, _x, _dict):
+        if _x == 1:
+            _dict[_passport].marital_status = "Single"
+        elif _x == 2:
+            _dict[_passport].marital_status = "Married"
+        elif _x == 3:
+            _dict[_passport].marital_status = "Divorced"
+        elif _x == 4:
+            _dict[_passport].marital_status = "Widowed"
+        else:
+            print("Opción inválida")
+        print(_dict[_passport].marital_status)
+        obj1 = Airport()
+        obj1.attendants = _dict
+        return _dict
+    def modify_travellers(self, _passport, _x, x, _dict):
+        if _x == 1:
+            if x == 1:
+                _dict[_passport].marital_status = "Single"
+            elif x == 2:
+                _dict[_passport].marital_status = "Married"
+            elif x == 3:
+                _dict[_passport].marital_status = "Divorced"
+            elif x == 4:
+                _dict[_passport].marital_status = "Widowed"
+            else:
+                print("Opción inválida")
+            print(_dict[_passport].marital_status)
+            obj1 = Airport()
+            obj1.travellers = _dict
+        elif _x == 2:
+            if x == 1:
+                _dict[_passport].gender = "MA"
+            elif x == 2:
+                _dict[_passport].gender = "FE"
+            else:
+                print("Opción inválida")
+            print(_dict[_passport].gender)
+            obj1 = Airport()
+            obj1.travellers = _dict
+        elif _x == 3:
+            _dict[_passport].date_of_birth = x
+            print(_dict[_passport].date_of_birth)
+            obj1 = Airport()
+            obj1.travellers = _dict
+        elif _x == 4:
+            flname = x.split(",")
+            _dict[_passport].forename = flname[0]
+            _dict[_passport].surname = flname[1]
+            print(_dict[_passport].forename, _dict[_passport].surname)
+            obj1 = Airport()
+            obj1.travellers = _dict
+        else:
+            print("Opción inválida")
+    def modify_passengers(self, _passport, _x, x, _dict):
+        if _x == 1:
+            _dict[_passport].seat = x
+            print(_dict[_passport].seat)
+            obj1 = Airport()
+            obj1.passengers = _dict
+        elif _x == 2:
+            if x == 1:
+                _dict[_passport].classes = "premier"
+            elif x == 2:
+                _dict[_passport].classes = "business"
+            elif x == 3:
+                _dict[_passport].classes = "economic"
+            else:
+                print("Opción inválida")
+            print(_dict[_passport].classes)
+            obj1 = Airport()
+            obj1.passengers = _dict
+        elif _x == 3:
+            if x == 1:
+                _dict[_passport].location = "check-in"
+            elif x == 2:
+                _dict[_passport].location = "security"
+            elif x == 3:
+                _dict[_passport].location = "boarded"
+            else:
+                print("Opción inválida")
+            print(_dict[_passport].location)
+            obj1 = Airport()
+            obj1.passengers = _dict
+        else:
+            print("Opción inválida")
+    def modify_flights(self, _code, _x, x, _dict):
+        if _x == 1:
+            _dict[_code].status = x
+            print(_dict[_code].status)
+        elif _x == 2:
+            gates = x.split(",")
+            _dict[_code].departure_gate = gates[0]
+            _dict[_code].arriving_gate = gates[1]
+            print(_dict[_code].departure_gate, _dict[_code].arriving_gate)
+        elif _x == 3:
+            tracks = x.split(",")
+            _dict[_code].take_off_track = tracks[0]
+            _dict[_code].landing_track = tracks[1]
+            print(_dict[_code].departure_gate, _dict[_code].arriving_gate)
+        elif _x == 4:
+            _dict[_code].attendants = x
+            print(_dict[_code].attendants)
+        else:
+            print("Opción inválida")
+        obj1 = Airport()
+        obj1.flights = _dict
 
 
