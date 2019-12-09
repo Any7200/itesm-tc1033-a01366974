@@ -1,0 +1,130 @@
+id,Nombre,Biblioteca de figuras,ID de página,Contenido por,Grupo,Origen de línea,Destino de la línea,Flecha de origen,Flecha de destino,Área de texto 1,Área de texto 2,Área de texto 3
+1,Página,,,,,,,,,Diagrama de clases UML,,
+2,Contenedor de rectángulo redondeado,Figuras de diagramas de flujo,1,,41,,,,,,,
+3,Texto,Estándar,1,2,41,,,,,"Tutoriales de diagramas de clases UML
+(mantén presionado Mayús + ⌘ o Ctrl, y haz clic)
+
+
+",,
+4,Texto,Estándar,1,2,41,,,,,Descripción,,
+5,Texto,Estándar,1,2,41,,,,,"Los diagramas de clases UML trazan la estructura de un sistema específico al modelar sus clases, atributos, operaciones y relaciones entre objetos. 
+
+Para personalizar esta plantilla, haz clic en cualquier figura y escribe la información que te gustaría incluir. Agrega las figuras de clases y organízalas según creas necesario. Luego, actualiza la cardinalidad. También puedes generar automáticamente diagramas de clases de tus repositorios de Bitbucket.",,
+6,Botón,Prototipos de interfaz de usuario,1,2,41,,,,,Mirar un tutorial sobre cómo generar automáticamente un diagrama de clases UML,,
+7,Botón,Prototipos de interfaz de usuario,1,2,41,,,,,Lee sobre los diagramas de clases UML,,
+8,Botón,Prototipos de interfaz de usuario,1,2,41,,,,,Mirar un tutorial de diagrama de clases UML,,
+9,Botón,Prototipos de interfaz de usuario,1,2,41,,,,,Mirar los tutoriales básicos de Lucidchart,,
+10,Imagen de usuario,Imágenes de usuario,1,2,41,,,,,,,
+11,Clase,UML,1,,,,,,,AirportAD,,"+ read_attendants()
++ read_pilots()
++ read_flights()
++ read_planes()
++ read_passengers()
++ read_travellers()
++ write_flights()
++ write_travellers()
++ write_passengers()
++modify_pilots()
++modify_attendants()
++modify_travellers()
++modify_passengers()
++modify_flights()"
+12,Clase,UML,1,,,,,,,Pilot,"+passport:varchart
++fromname:varchart
++surname:varchart
++date_of_birthday:varchart
++country:varchart
++gender:varchart
++marital_status:varchart",
+13,Clase,UML,1,,,,,,,Attendant,"+passport:varchart
++fromname:varchart
++surname:varchart
++date_of_birthday:varchart
++country:varchart
++gender:varchart
++marital_status:varchart",
+14,Clase,UML,1,,,,,,,Traveller,"+passport:varchart
++fromname:varchart
++surname:varchart
++date_of_birthday:varchart
++country:varchart
++gender:varchart
++marital_status:varchart",
+15,Clase,UML,1,,,,,,,Flight,"+ id:int
++plate:varchart
++origin:varchart
++destiny:varchart
++departure:varchart
++arriving:varchart
++status:varchart
++departure_gate:varchart
++take_of_track:varchart
++arriving_gate:varchart
++landing_track:varchart
++pilot:varchart
++copilot:varchart
++attendants:varchart",
+16,Clase,UML,1,,,,,,,Passenger,"+flight:varchart
++passport:varchart
++classes:varchart
++seat:varchart
++location:varchart",
+17,Clase,UML,1,,,,,,,Planes,"+plate:varchart
++manufacture:varchart
++model:varchart
++pcapacity:varchart
++lcapacity:varchart
++maxspeed:varchart",
+18,Clase,UML,1,,,,,,,Airport,"+tracks:varchart
++passengers:varchart
++pilots:varchart
++attendants:varchart
++travellers:varchart
++flights:varchart
++planes:varchart","+populate_airport()
++generate_statistics(date, time)"
+19,Clase,UML,1,,,,,,,AirportUI,,+user_decision_menu()
+20,Clase,UML,1,,,,,,,Report,"+date:varchart
++time:varchart
++no_empty_tracks:varchart
+no_occupied_tracks:varchart
++no_passengers_check_in:
++no_passengers_security:
++no_passengers_boarded:
++no_flights_landed:
++no_flights_in_transit:
++no_empty_gates:
++no_occupied_gates:","+write_files(no_empty_tracks, no_occupied_tracks, no_passengers_check_in, no_passengers_security, no_passengers_boarded, no_flights_landed, no_flights_in_transit, no_empty_gates, no_occupied_gates)"
+21,Clase,UML,1,,,,,,,CategoriesUI,,"+add_data_flight()
++add_travellers()
++add_passengers()
++change_pilots()
++change_attendants()
++change_travellers()
++get_user_input()"
+22,Clase,UML,1,,,,,,,Crew,"+passport:varchart
++fromname:varchart
++surname:varchart
++date_of_birthday:varchart
++country:varchart
++gender:varchart
++marital_status:varchart",
+23,Bifurcación/unión horizontal,UML,1,,,,,,,,,
+24,Bifurcación/unión vertical,UML,1,,,,,,,,,
+25,Bifurcación/unión vertical,UML,1,,,,,,,,,
+26,Bifurcación/unión vertical,UML,1,,,,,,,,,
+27,Bifurcación/unión horizontal,UML,1,,,,,,,,,
+28,Bifurcación/unión vertical,UML,1,,,,,,,,,
+29,Bifurcación/unión vertical,UML,1,,,,,,,,,
+30,Bifurcación/unión horizontal,UML,1,,,,,,,,,
+31,Bifurcación/unión vertical,UML,1,,,,,,,,,
+32,Bifurcación/unión vertical,UML,1,,,,,,,,,
+33,Bifurcación/unión vertical,UML,1,,,,,,,,,
+34,Bifurcación/unión vertical,UML,1,,,,,,,,,
+35,Bifurcación/unión horizontal,UML,1,,,,,,,,,
+36,Línea,,1,,,23,22,None,Open Arrow,,,
+37,Línea,,1,,,13,11,None,Aggregation,,,
+38,Línea,,1,,,15,18,None,Composition,,,
+39,Línea,,1,,,21,19,None,Composition,,,
+40,Línea,,1,,,15,20,None,Composition,,,
+41,Grupo 1,,1,,,,,,,,,
